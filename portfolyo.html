@@ -1,0 +1,837 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nur Mina Özekes — Portfolio</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --cream:   #faf7f2;
+    --warm:    #f0e9df;
+    --sand:    #e0d4c4;
+    --terra:   #b08d7a;
+    --deep:    #3d2b1f;
+    --ink:     #1a1208;
+    --muted:   #9a8878;
+    --sage:    #8a9e8a;
+    --white:   #fffefb;
+    --radius:  18px;
+    --font-display: 'Cormorant Garamond', serif;
+    --font-body:    'DM Sans', sans-serif;
+  }
+
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: var(--font-body);
+    font-size: 15px;
+    line-height: 1.7;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ───────────────────────────────────────────── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.1rem 4rem;
+    background: rgba(250,247,242,0.85);
+    backdrop-filter: blur(14px);
+    border-bottom: 1px solid var(--sand);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.25rem;
+    font-weight: 500;
+    color: var(--deep);
+    letter-spacing: 0.02em;
+    text-decoration: none;
+  }
+  .nav-links { display: flex; gap: 2.4rem; list-style: none; }
+  .nav-links a {
+    font-size: 0.8rem;
+    font-weight: 400;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.2s;
+  }
+  .nav-links a:hover { color: var(--terra); }
+
+  /* ── HAMBURGER ─────────────────────────────────────── */
+  .hamburger { display: none; flex-direction: column; gap: 5px; cursor: pointer; padding: 4px; }
+  .hamburger span { display: block; width: 24px; height: 1.5px; background: var(--deep); transition: all 0.3s; }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; background: var(--cream);
+    z-index: 99; flex-direction: column; align-items: center; justify-content: center; gap: 2.5rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: var(--font-display); font-size: 2rem; font-weight: 300;
+    color: var(--deep); text-decoration: none; letter-spacing: 0.04em;
+  }
+
+  /* ── SECTIONS ──────────────────────────────────────── */
+  section { padding: 7rem 4rem; max-width: 1200px; margin: 0 auto; }
+  section:first-of-type { padding-top: 10rem; }
+
+  /* ── HERO ──────────────────────────────────────────── */
+  #home {
+    min-height: 100vh;
+    display: flex; align-items: center;
+    max-width: 100%;
+    padding: 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, var(--warm) 0%, var(--cream) 55%, #ede3d8 100%);
+  }
+  .hero-blob {
+    position: absolute; border-radius: 50%;
+    background: var(--sand); opacity: 0.5; filter: blur(80px);
+  }
+  .hero-blob.b1 { width: 600px; height: 600px; top: -100px; right: -150px; }
+  .hero-blob.b2 { width: 400px; height: 400px; bottom: -80px; left: 10%; }
+  .hero-inner {
+    position: relative; z-index: 2;
+    max-width: 1200px; width: 100%; margin: 0 auto;
+    padding: 7rem 4rem;
+    display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center;
+  }
+  .hero-text {}
+  .hero-eyebrow {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 1.2rem; font-weight: 500;
+  }
+  .hero-name {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 6vw, 5.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: var(--deep);
+    margin-bottom: 1.6rem;
+  }
+  .hero-name em { font-style: italic; color: var(--terra); }
+  .hero-desc {
+    font-size: 1rem; font-weight: 300;
+    color: var(--muted); max-width: 480px;
+    margin-bottom: 2.5rem; line-height: 1.75;
+  }
+  .hero-cta { display: flex; gap: 1rem; flex-wrap: wrap; }
+  .btn {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.75rem 1.8rem; border-radius: 50px;
+    font-size: 0.82rem; font-weight: 500; letter-spacing: 0.06em;
+    text-transform: uppercase; text-decoration: none;
+    transition: all 0.25s; cursor: pointer; border: none;
+  }
+  .btn-primary {
+    background: var(--terra); color: var(--white);
+    box-shadow: 0 4px 20px rgba(176,141,122,0.35);
+  }
+  .btn-primary:hover { background: var(--deep); transform: translateY(-2px); box-shadow: 0 8px 28px rgba(61,43,31,0.28); }
+  .btn-outline {
+    background: transparent; color: var(--deep);
+    border: 1.5px solid var(--sand);
+  }
+  .btn-outline:hover { border-color: var(--terra); color: var(--terra); }
+
+  .hero-card-wrap {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;
+  }
+  .info-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 1.5rem; box-shadow: 0 2px 20px rgba(61,43,31,0.06);
+    border: 1px solid var(--sand);
+    animation: float 4s ease-in-out infinite;
+  }
+  .info-card:nth-child(2) { animation-delay: 1s; margin-top: 1.5rem; }
+  .info-card:nth-child(3) { animation-delay: 0.5s; }
+  .info-card:nth-child(4) { animation-delay: 1.5s; margin-top: 1.5rem; }
+  @keyframes float {
+    0%,100% { transform: translateY(0); }
+    50%      { transform: translateY(-8px); }
+  }
+  .info-card .ic-label {
+    font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 0.4rem; font-weight: 500;
+  }
+  .info-card .ic-value {
+    font-family: var(--font-display); font-size: 1.5rem; font-weight: 500; color: var(--deep);
+  }
+  .info-card .ic-sub { font-size: 0.8rem; color: var(--muted); margin-top: 0.2rem; }
+
+  /* ── ABOUT ─────────────────────────────────────────── */
+  #about {
+    display: grid; grid-template-columns: 1fr 1.6fr; gap: 5rem; align-items: start;
+  }
+  .about-left {}
+  .section-tag {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--terra); display: block; margin-bottom: 1rem; font-weight: 500;
+  }
+  .section-title {
+    font-family: var(--font-display); font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 300; line-height: 1.15; color: var(--deep); margin-bottom: 1.5rem;
+  }
+  .section-title em { font-style: italic; color: var(--terra); }
+
+  .about-photo-box {
+    background: var(--warm);
+    border-radius: var(--radius);
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    border: 1px solid var(--sand);
+    display: flex; align-items: center; justify-content: center;
+    position: relative;
+  }
+  .about-photo-box::after {
+    content: "N M";
+    font-family: var(--font-display);
+    font-size: 4rem; font-weight: 300;
+    color: var(--terra); opacity: 0.4;
+  }
+  .about-right {}
+  .about-text { font-weight: 300; color: var(--muted); line-height: 1.85; margin-bottom: 2rem; }
+  .about-text strong { color: var(--deep); font-weight: 500; }
+
+  .edu-timeline { margin-top: 2rem; }
+  .edu-item {
+    display: flex; gap: 1.5rem;
+    padding-bottom: 1.5rem;
+    border-left: 1.5px solid var(--sand);
+    padding-left: 1.5rem;
+    position: relative; margin-left: 0.5rem;
+  }
+  .edu-item::before {
+    content: ""; position: absolute; left: -5px; top: 6px;
+    width: 9px; height: 9px; border-radius: 50%;
+    background: var(--terra); border: 2px solid var(--cream);
+  }
+  .edu-year { font-size: 0.78rem; color: var(--terra); white-space: nowrap; padding-top: 2px; font-weight: 500; }
+  .edu-info .edu-name { font-weight: 500; color: var(--deep); }
+  .edu-info .edu-school { font-size: 0.85rem; color: var(--muted); }
+
+  /* ── SKILLS ────────────────────────────────────────── */
+  #skills { background: var(--warm); max-width: 100%; border-radius: 0; }
+  #skills .inner { max-width: 1200px; margin: 0 auto; }
+  .skills-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; margin-top: 3rem; }
+  .skill-card {
+    background: var(--white); border-radius: var(--radius);
+    padding: 1.8rem; border: 1px solid var(--sand);
+    transition: transform 0.25s, box-shadow 0.25s;
+  }
+  .skill-card:hover { transform: translateY(-4px); box-shadow: 0 12px 32px rgba(61,43,31,0.1); }
+  .skill-card .sk-icon {
+    font-size: 1.5rem; margin-bottom: 0.8rem;
+  }
+  .skill-card .sk-title {
+    font-family: var(--font-display); font-size: 1.15rem;
+    font-weight: 500; color: var(--deep); margin-bottom: 0.7rem;
+  }
+  .skill-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; }
+  .tag {
+    background: var(--warm); border: 1px solid var(--sand);
+    border-radius: 20px; padding: 0.25rem 0.75rem;
+    font-size: 0.75rem; color: var(--deep);
+  }
+  .lang-row { display: flex; gap: 1rem; flex-wrap: wrap; margin-top: 2rem; }
+  .lang-badge {
+    background: var(--terra); color: var(--white);
+    border-radius: 50px; padding: 0.5rem 1.5rem;
+    font-size: 0.82rem; font-weight: 500;
+  }
+  .lang-badge span { opacity: 0.75; margin-left: 0.4rem; font-weight: 300; }
+
+  /* ── PROJECTS ──────────────────────────────────────── */
+  #projects {}
+  .projects-header { margin-bottom: 3rem; }
+  .projects-masonry {
+    columns: 2; column-gap: 1.5rem;
+  }
+  .project-card {
+    break-inside: avoid;
+    background: var(--white); border-radius: var(--radius);
+    border: 1px solid var(--sand);
+    padding: 2rem; margin-bottom: 1.5rem;
+    transition: transform 0.25s, box-shadow 0.25s;
+    position: relative; overflow: hidden;
+  }
+  .project-card::before {
+    content: ""; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+    background: linear-gradient(90deg, var(--terra), var(--sage));
+  }
+  .project-card:hover { transform: translateY(-5px); box-shadow: 0 16px 40px rgba(61,43,31,0.12); }
+  .proj-num {
+    font-family: var(--font-display); font-size: 3rem; font-weight: 300;
+    color: var(--sand); position: absolute; top: 1rem; right: 1.5rem;
+    line-height: 1;
+  }
+  .proj-category {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    color: var(--terra); margin-bottom: 0.7rem; font-weight: 500;
+  }
+  .proj-name {
+    font-family: var(--font-display); font-size: 1.5rem;
+    font-weight: 500; color: var(--deep); line-height: 1.2;
+    margin-bottom: 0.8rem;
+  }
+  .proj-desc { font-size: 0.88rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.2rem; }
+  .proj-tech { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.2rem; }
+  .proj-link {
+    display: inline-flex; align-items: center; gap: 0.4rem;
+    font-size: 0.78rem; letter-spacing: 0.08em; text-transform: uppercase;
+    font-weight: 500; color: var(--terra); text-decoration: none;
+    border-bottom: 1px solid var(--sand); padding-bottom: 1px;
+    transition: color 0.2s, border-color 0.2s;
+  }
+  .proj-link:hover { color: var(--deep); border-color: var(--deep); }
+
+  /* ── CV ────────────────────────────────────────────── */
+  #cv { background: var(--deep); max-width: 100%; }
+  #cv .inner { max-width: 1200px; margin: 0 auto; padding: 7rem 4rem; }
+  #cv .section-tag, #cv .section-title, #cv p { color: var(--cream); }
+  #cv .section-title em { color: var(--terra); }
+  .cv-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-top: 3rem; }
+  .cv-card {
+    background: rgba(255,255,255,0.07); border-radius: var(--radius);
+    padding: 2.5rem; border: 1px solid rgba(255,255,255,0.12);
+    text-align: center;
+    transition: background 0.25s;
+  }
+  .cv-card:hover { background: rgba(255,255,255,0.12); }
+  .cv-card .cv-flag { font-size: 2.5rem; margin-bottom: 1rem; }
+  .cv-card .cv-lang {
+    font-family: var(--font-display); font-size: 1.6rem; font-weight: 300;
+    color: var(--cream); margin-bottom: 0.3rem;
+  }
+  .cv-card .cv-sub { font-size: 0.82rem; color: var(--muted); margin-bottom: 1.5rem; }
+  .btn-cv {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    padding: 0.7rem 1.6rem; border-radius: 50px;
+    font-size: 0.78rem; font-weight: 500; letter-spacing: 0.08em; text-transform: uppercase;
+    background: var(--terra); color: var(--white); text-decoration: none;
+    transition: all 0.25s; cursor: pointer; border: none; font-family: var(--font-body);
+  }
+  .btn-cv:hover { background: var(--cream); color: var(--deep); }
+
+  /* ── CONTACT ───────────────────────────────────────── */
+  #contact {}
+  .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: start; margin-top: 3rem; }
+  .contact-big {
+    font-family: var(--font-display); font-size: clamp(2rem, 4vw, 3.5rem);
+    font-weight: 300; line-height: 1.15; color: var(--deep); margin-bottom: 1.5rem;
+  }
+  .contact-big em { font-style: italic; color: var(--terra); }
+  .contact-links { display: flex; flex-direction: column; gap: 1rem; }
+  .contact-item {
+    display: flex; align-items: center; gap: 1rem;
+    padding: 1.2rem 1.5rem; border-radius: var(--radius);
+    background: var(--white); border: 1px solid var(--sand);
+    text-decoration: none; color: var(--deep);
+    transition: all 0.25s;
+  }
+  .contact-item:hover { border-color: var(--terra); transform: translateX(4px); }
+  .contact-item .ci-icon { font-size: 1.2rem; }
+  .contact-item .ci-text {}
+  .contact-item .ci-label { font-size: 0.68rem; letter-spacing: 0.15em; text-transform: uppercase; color: var(--terra); }
+  .contact-item .ci-value { font-size: 0.9rem; font-weight: 400; color: var(--deep); }
+
+  /* ── FOOTER ─────────────────────────────────────────── */
+  footer {
+    border-top: 1px solid var(--sand); padding: 2rem 4rem;
+    display: flex; align-items: center; justify-content: space-between;
+    font-size: 0.8rem; color: var(--muted);
+  }
+  footer a { color: var(--terra); text-decoration: none; }
+
+  /* ── ANIMATIONS ─────────────────────────────────────── */
+  .fade-up {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.65s ease, transform 0.65s ease;
+  }
+  .fade-up.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ─────────────────────────────────────── */
+
+  /* Tablet & büyük telefon */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+
+    section {
+      padding: 4rem 1.25rem;
+      max-width: 100%;
+    }
+    section:first-of-type { padding-top: 7rem; }
+
+    /* hero */
+    .hero-inner {
+      grid-template-columns: 1fr;
+      gap: 2.5rem;
+      padding: 5.5rem 1.25rem 3.5rem;
+    }
+    .hero-card-wrap { display: none; }
+    .hero-name { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+    .hero-desc { font-size: 0.93rem; }
+
+    /* about */
+    #about {
+      grid-template-columns: 1fr;
+      gap: 2rem;
+      padding: 4rem 1.25rem;
+    }
+    .about-photo-box { display: none; }
+
+    /* skills */
+    #skills .inner { padding: 4rem 1.25rem !important; }
+    .skills-grid { grid-template-columns: 1fr 1fr; gap: 1rem; }
+
+    /* projects */
+    #projects { padding: 4rem 1.25rem; }
+    .projects-masonry { columns: 1; column-gap: 0; }
+
+    /* cv */
+    #cv .inner { padding: 4rem 1.25rem !important; }
+    .cv-cards { grid-template-columns: 1fr; gap: 1.25rem; }
+
+    /* contact */
+    #contact { padding: 4rem 1.25rem; }
+    .contact-grid { grid-template-columns: 1fr; gap: 2rem; margin-top: 2rem; }
+
+    footer {
+      flex-direction: column;
+      gap: 0.5rem;
+      text-align: center;
+      padding: 1.5rem 1.25rem;
+    }
+  }
+
+  /* Küçük telefon */
+  @media (max-width: 480px) {
+    body { font-size: 14px; }
+    .skills-grid { grid-template-columns: 1fr; }
+    .hero-name { font-size: clamp(2rem, 11vw, 2.8rem); }
+    .section-title { font-size: clamp(1.7rem, 7vw, 2.3rem); }
+    .hero-cta { flex-direction: column; }
+    .btn { text-align: center; justify-content: center; }
+    .contact-item .ci-value { font-size: 0.8rem; word-break: break-all; }
+    .proj-num { font-size: 2rem; }
+    .project-card { padding: 1.4rem; }
+    .skill-card { padding: 1.3rem; }
+    .cv-card { padding: 1.75rem 1.25rem; }
+    nav { padding: 0.9rem 1rem; }
+    .nav-logo { font-size: 1.05rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav>
+  <a href="#home" class="nav-logo">Nur Mina Özekes</a>
+  <ul class="nav-links">
+    <li><a href="#about">Hakkımda</a></li>
+    <li><a href="#skills">Beceriler</a></li>
+    <li><a href="#projects">Projeler</a></li>
+    <li><a href="#cv">CV</a></li>
+    <li><a href="#contact">İletişim</a></li>
+  </ul>
+  <div class="hamburger" id="ham" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#about" onclick="closeMenu()">Hakkımda</a>
+  <a href="#skills" onclick="closeMenu()">Beceriler</a>
+  <a href="#projects" onclick="closeMenu()">Projeler</a>
+  <a href="#cv" onclick="closeMenu()">CV</a>
+  <a href="#contact" onclick="closeMenu()">İletişim</a>
+</div>
+
+<!-- HERO -->
+<div id="home">
+  <div class="hero-bg"></div>
+  <div class="hero-blob b1"></div>
+  <div class="hero-blob b2"></div>
+  <div class="hero-inner">
+    <div class="hero-text">
+      <p class="hero-eyebrow">Portfolyo · 2026</p>
+      <h1 class="hero-name">Nur Mina<br><em>Özekes</em></h1>
+      <p class="hero-desc">
+        Bilgisayar Programcılığı öğrencisi — web, mobil, veri bilimi ve gömülü sistemler alanlarında projeler geliştiren, yapay zekâ ve yazılım mühendisliğine odaklanmış bir geliştirici.
+      </p>
+      <div class="hero-cta">
+        <a href="#projects" class="btn btn-primary">Projeleri Gör ↓</a>
+        <a href="#contact" class="btn btn-outline">İletişime Geç</a>
+      </div>
+    </div>
+    <div class="hero-card-wrap" style="grid-template-columns:1fr 1fr; grid-template-rows:auto;">
+      <div class="info-card">
+        <p class="ic-label">Üniversite</p>
+        <p class="ic-value">İEÜ</p>
+        <p class="ic-sub">Bilgisayar Programcılığı</p>
+      </div>
+      <div class="info-card">
+        <p class="ic-label">Deneyim</p>
+        <p class="ic-value">ZoiData</p>
+        <p class="ic-sub">Yazılım stajı · 2025</p>
+      </div>
+      <div class="info-card" style="grid-column:1/-1; margin-top:0;">
+        <p class="ic-label">Hedef</p>
+        <p class="ic-value" style="font-size:1.1rem;">Yapay Zekâ & Otomotiv</p>
+        <p class="ic-sub">Sağlam sistemler geliştirmek</p>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section id="about">
+  <div class="about-left fade-up">
+    <span class="section-tag">Hakkımda</span>
+    <h2 class="section-title">Kod yazan,<br>sistem<br><em>kuran</em></h2>
+    <div class="about-photo-box"></div>
+  </div>
+  <div class="about-right fade-up">
+    <p class="about-text">
+      İzmir Ekonomi Üniversitesi Meslek Yüksekokulu'nda <strong>Bilgisayar Programcılığı</strong> okuyorum. Python, JavaScript, React Native, C#, Java ve Arduino ile projeler geliştiriyorum; web uygulamalarından mobil geliştirmeye, veri biliminden gömülü sistemlere geniş bir yelpazede çalışıyorum.
+    </p>
+    <p class="about-text">
+      Uzun vadeli hedefim <strong>yapay zekâyı otomotiv sistemlerine entegre ederek sağlam yazılımlar üretmek</strong>. Üniversitenin Yazılım Kulübü aktif üyesiyim; iki yıl üst üste Gameathon etkinliğinde <strong>mentörlük</strong> yaptım, <strong>Bahar Şenliği</strong> organizasyonunda görev aldım ve <strong>OBS Destek Masası (Ders Tercih Günleri)</strong>'nde öğrencilere destek verdim.
+    </p>
+    <div class="edu-timeline">
+      <div class="edu-item">
+        <span class="edu-year">2024–2026</span>
+        <div class="edu-info">
+          <p class="edu-name">Bilgisayar Programcılığı</p>
+          <p class="edu-school">İzmir Ekonomi Üniversitesi MYO</p>
+        </div>
+      </div>
+      <div class="edu-item">
+        <span class="edu-year">2023–2024</span>
+        <div class="edu-info">
+          <p class="edu-name">Grafik Tasarım</p>
+          <p class="edu-school">İzmir Ekonomi Üniversitesi MYO · GPA 3,07</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SKILLS -->
+<section id="skills" style="max-width:100%; padding:0;">
+  <div class="inner" style="padding:7rem 4rem;">
+    <span class="section-tag fade-up">Beceriler</span>
+    <h2 class="section-title fade-up">Teknik &<br><em>Yaratıcı</em> Araçlar</h2>
+    <div class="skills-grid">
+      <div class="skill-card fade-up">
+        <div class="sk-icon">🐍</div>
+        <p class="sk-title">Programlama</p>
+        <div class="skill-tags">
+          <span class="tag">Python</span>
+          <span class="tag">JavaScript</span>
+          <span class="tag">TypeScript</span>
+          <span class="tag">C#</span>
+          <span class="tag">Java</span>
+          <span class="tag">PHP</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="sk-icon">🌐</div>
+        <p class="sk-title">Web & Mobil</p>
+        <div class="skill-tags">
+          <span class="tag">HTML & CSS</span>
+          <span class="tag">React Native</span>
+          <span class="tag">TypeScript</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="sk-icon">🗄️</div>
+        <p class="sk-title">Veritabanı</p>
+        <div class="skill-tags">
+          <span class="tag">Microsoft MS SQL</span>
+          <span class="tag">MySQL</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="sk-icon">🎨</div>
+        <p class="sk-title">Tasarım</p>
+        <div class="skill-tags">
+          <span class="tag">Photoshop</span>
+          <span class="tag">Illustrator</span>
+          <span class="tag">After Effects</span>
+          <span class="tag">Adobe XD</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="sk-icon">⚙️</div>
+        <p class="sk-title">Donanım / IoT</p>
+        <div class="skill-tags">
+          <span class="tag">Arduino Uno</span>
+          <span class="tag">C++ / Wiring</span>
+          <span class="tag">Active Buzzer</span>
+        </div>
+      </div>
+      <div class="skill-card fade-up">
+        <div class="sk-icon">🛠️</div>
+        <p class="sk-title">Proje Yönetim Araçları</p>
+        <div class="skill-tags">
+          <span class="tag">GitHub</span>
+          <span class="tag">GitLab</span>
+          <span class="tag">Jira</span>
+          <span class="tag">Miro</span>
+          <span class="tag">Jenkins</span>
+        </div>
+      </div>
+    </div>
+    <div class="lang-row fade-up">
+      <span class="lang-badge">İngilizce <span>C2 — İleri Düzey</span></span>
+      <span class="lang-badge">Almanca <span>A2 — Başlangıç</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- PROJECTS -->
+<section id="projects" style="max-width:1200px;">
+  <div class="projects-header fade-up">
+    <span class="section-tag">Projeler</span>
+    <h2 class="section-title">Geliştirdiğim<br><em>İşler</em></h2>
+  </div>
+  <div class="projects-masonry">
+
+    <div class="project-card fade-up">
+      <span class="proj-num">01</span>
+      <p class="proj-category">Sistem Analizi · IoT</p>
+      <h3 class="proj-name">Akıllı İlaç Takip Kutusu</h3>
+      <p class="proj-desc">
+        Arduino Uno üzerinde millis() tabanlı zamanlayıcı kullanılarak gerçek zamanlı saat modülüne (RTC) gerek duymadan ilaç saatlerini takip eden sistem. Belirlenen aralıklarda aktif buzzer 30 saniyelik uyarı sesi çalar. Tüm kod Türkçe yorumlarla belgelenmiştir.
+      </p>
+      <div class="proj-tech">
+        <span class="tag">Arduino Uno</span>
+        <span class="tag">C++</span>
+        <span class="tag">Active Buzzer</span>
+        <span class="tag">millis()</span>
+      </div>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">GitHub'da İncele →</a>
+    </div>
+
+    <div class="project-card fade-up">
+      <span class="proj-num">02</span>
+      <p class="proj-category">Web Geliştirme</p>
+      <h3 class="proj-name">Niki Kafe — Web Sitesi</h3>
+      <p class="proj-desc">
+        Niki Kafe için sıfırdan tasarlanmış ve kodlanmış kurumsal web sitesi. Menü sayfası, galeri ve iletişim bölümlerini barındıran, mobil uyumlu responsive tasarım. Sade ve sıcak renk paleti ile kafenin atmosferini dijitale taşıyor.
+      </p>
+      <div class="proj-tech">
+        <span class="tag">HTML</span>
+        <span class="tag">CSS</span>
+        <span class="tag">JavaScript</span>
+        <span class="tag">Responsive</span>
+      </div>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">GitHub'da İncele →</a>
+    </div>
+
+    <div class="project-card fade-up">
+      <span class="proj-num">03</span>
+      <p class="proj-category">Mobil Uygulama</p>
+      <h3 class="proj-name">Niki Kafe — Mobil Uygulama</h3>
+      <p class="proj-desc">
+        Niki Kafe'nin web sitesinin mobil versiyonunu aşan, çapraz platform React Native uygulaması. Ürün listeleme, sepet yönetimi, sipariş geçmişi ve anlık bildirim özellikleri sunuyor. iOS ve Android'de tek kod tabanıyla çalışıyor.
+      </p>
+      <div class="proj-tech">
+        <span class="tag">React Native</span>
+        <span class="tag">TypeScript</span>
+        <span class="tag">iOS & Android</span>
+      </div>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">GitHub'da İncele →</a>
+    </div>
+
+    <div class="project-card fade-up">
+      <span class="proj-num">04</span>
+      <p class="proj-category">Veri Bilimi · NLP</p>
+      <h3 class="proj-name">Türkçe Yorum Duygu Analizi</h3>
+      <p class="proj-desc">
+        Kullanıcının textbox aracılığıyla manuel olarak girdiği Türkçe yorumları makine öğrenmesi ile "olumlu" veya "olumsuz" olarak sınıflandıran NLP projesi. Pandas ile veri işleme, Scikit-learn ile model eğitimi ve görsel raporlama içeriyor.
+      </p>
+      <div class="proj-tech">
+        <span class="tag">Python</span>
+        <span class="tag">NLP</span>
+        <span class="tag">Scikit-learn</span>
+        <span class="tag">Pandas</span>
+        <span class="tag">Türkçe</span>
+      </div>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">GitHub'da İncele →</a>
+    </div>
+
+    <div class="project-card fade-up">
+      <span class="proj-num">05</span>
+      <p class="proj-category">Görsel Programlama · MBP 207</p>
+      <h3 class="proj-name">OASIS — Öğrenci Bilgi Sistemi</h3>
+      <p class="proj-desc">
+        Okulumuzun eski OASIS sistemi referans alınarak Python ile sıfırdan yeniden yazılmış öğrenci bilgi sistemi. Ders kayıt, not görüntüleme ve öğrenci yönetimi gibi OBS işlevlerini modern bir arayüzle sunuyor.
+      </p>
+      <div class="proj-tech">
+        <span class="tag">Python</span>
+        <span class="tag">Görsel Programlama</span>
+        <span class="tag">OBS</span>
+      </div>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">GitHub'da İncele →</a>
+    </div>
+
+    <!-- GitHub catch-all card -->
+    <div class="project-card fade-up" style="background: var(--warm); border-style: dashed;">
+      <span class="proj-num">+</span>
+      <p class="proj-category">Tüm Projeler</p>
+      <h3 class="proj-name">GitHub Profilim</h3>
+      <p class="proj-desc">
+        Yukarıdaki projelerin kaynak kodları ve diğer çalışmalarım GitHub'da açık repolar halinde yayımlanmaktadır.
+      </p>
+      <a href="https://github.com/minaozekes" target="_blank" class="proj-link">github.com/minaozekes →</a>
+    </div>
+
+  </div>
+</section>
+
+<!-- CV -->
+<section id="cv" style="max-width:100%; padding:0;">
+  <div class="inner">
+    <span class="section-tag fade-up">Özgeçmiş</span>
+    <h2 class="section-title fade-up">CV'mi<br><em>İndir</em></h2>
+    <p class="fade-up" style="color:var(--muted); margin-top:0.5rem; max-width:520px;">
+      Türkçe ve İngilizce CV'lerim PDF formatında aşağıdan indirilebilir.
+    </p>
+    <div class="cv-cards">
+      <div class="cv-card fade-up">
+        <div class="cv-flag">🇹🇷</div>
+        <p class="cv-lang">Türkçe CV</p>
+        <p class="cv-sub">Özgeçmiş — PDF</p>
+        <button onclick="downloadCV('NurMina_Ozekes_CV_TR.pdf', 'NurMina_Ozekes_CV_TR.pdf')" class="btn-cv">⬇ İndir</button>
+      </div>
+      <div class="cv-card fade-up">
+        <div class="cv-flag">🇬🇧</div>
+        <p class="cv-lang">English CV</p>
+        <p class="cv-sub">Resume — PDF</p>
+        <button onclick="downloadCV('NurMinaO_zekesCV_I__pdf-2.pdf', 'NurMina_Ozekes_CV_EN.pdf')" class="btn-cv">⬇ Download</button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<section id="contact" style="max-width:1200px;">
+  <div class="contact-grid">
+    <div class="fade-up">
+      <span class="section-tag">İletişim</span>
+      <h2 class="contact-big">Birlikte bir<br><em>şeyler</em><br>yapalım.</h2>
+      <p style="color:var(--muted); font-size:0.9rem; line-height:1.75;">
+        Proje teklifleri, iş birlikleri veya sadece merhaba demek için bana ulaşabilirsiniz.
+      </p>
+    </div>
+    <div class="contact-links fade-up">
+      <a href="mailto:nurmina.ozekes.04@gmail.com" class="contact-item">
+        <span class="ci-icon">✉️</span>
+        <div class="ci-text">
+          <p class="ci-label">E-posta</p>
+          <p class="ci-value">nurmina.ozekes.04@gmail.com</p>
+        </div>
+      </a>
+      <a href="https://www.linkedin.com/in/nur-mina-özekes-0b7460255/" target="_blank" class="contact-item">
+        <span class="ci-icon">💼</span>
+        <div class="ci-text">
+          <p class="ci-label">LinkedIn</p>
+          <p class="ci-value">linkedin.com/in/nur-mina-özekes</p>
+        </div>
+      </a>
+      <a href="https://github.com/minaozekes" target="_blank" class="contact-item">
+        <span class="ci-icon">🐙</span>
+        <div class="ci-text">
+          <p class="ci-label">GitHub</p>
+          <p class="ci-value">github.com/minaozekes</p>
+        </div>
+      </a>
+      <a href="tel:+905301386317" class="contact-item">
+        <span class="ci-icon">📞</span>
+        <div class="ci-text">
+          <p class="ci-label">Telefon</p>
+          <p class="ci-value">0(530) 138 63 17</p>
+        </div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer>
+  <p>© 2026 Nur Mina Özekes</p>
+  <a href="https://github.com/minaozekes" target="_blank">GitHub ↗</a>
+</footer>
+
+<script>
+  // CV download — fetch+blob yöntemi (Netlify statik hosting için en güvenilir)
+  async function downloadCV(filename, saveAs) {
+    try {
+      const res = await fetch(filename);
+      if (!res.ok) throw new Error('fetch failed');
+      const blob = await res.blob();
+      const url  = URL.createObjectURL(blob);
+      const a    = document.createElement('a');
+      a.href     = url;
+      a.download = saveAs;
+      document.body.appendChild(a);
+      a.click();
+      document.body.removeChild(a);
+      setTimeout(() => URL.revokeObjectURL(url), 5000);
+    } catch (e) {
+      // fallback: yeni sekmede aç
+      window.open(filename, '_blank');
+    }
+  }
+  // Hamburger menu
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+  }
+
+  // Scroll-triggered fade-up
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-up').forEach(el => observer.observe(el));
+
+  // Smooth active nav link highlight
+  const sections = document.querySelectorAll('[id]');
+  const navLinks = document.querySelectorAll('.nav-links a');
+  window.addEventListener('scroll', () => {
+    let current = '';
+    sections.forEach(s => {
+      if (window.scrollY >= s.offsetTop - 120) current = s.id;
+    });
+    navLinks.forEach(a => {
+      a.style.color = a.getAttribute('href') === '#' + current
+        ? 'var(--terra)' : '';
+    });
+  });
+</script>
+</body>
+</html>
